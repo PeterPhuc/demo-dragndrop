@@ -17,7 +17,9 @@ class ContactView {
     }
     init () {
         const isPositionChange = JSON.parse(localStorage.getItem("Position"));
-        this.reStyle(isPositionChange.left, isPositionChange.top);
+        if(isPositionChange) {
+            this.reStyle(isPositionChange.left, isPositionChange.top);
+        }
     }
 
     getPos () {
