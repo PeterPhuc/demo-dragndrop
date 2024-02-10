@@ -31,7 +31,18 @@ class ContactView {
 
     onMouseDown() {
         const _this = this;
+
+        // for desktop
         this.#imageBox.addEventListener('mousedown', function(e){
+            e.preventDefault();
+            if(e.button == 0) {
+                _this.setCurrentPositionImage();
+                _this.onMouseMove(e.clientX - _this.getPos().posX, e.clientY - _this.getPos().posY);
+            }
+        })
+
+        //for mobile, tablet, ipad...
+        this.#imageBox.addEventListener('touchstart', function(e){
             e.preventDefault();
             if(e.button == 0) {
                 _this.setCurrentPositionImage();
@@ -51,6 +62,13 @@ class ContactView {
         })
         this.#body.addEventListener('mouseleave', function(e){
             this.removeEventListener('mousemove', Wrap);
+        })
+
+
+        
+        this.#body.addEventListener('touchmove', Wrap)
+        this.#body.addEventListener('touchend', function(e){
+            this.removeEventListener('touchmove', Wrap);
         })
     }
 
